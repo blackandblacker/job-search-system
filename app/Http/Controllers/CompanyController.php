@@ -48,7 +48,6 @@ class CompanyController extends Controller
         //}
         $company = new Company([
             'name' => $request->get('name'),
-            'job_id' => $request->get('job_id'),
             'city' => $request->get('company_city'),
             'jobid' => $request->get('job_id'),
 

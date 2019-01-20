@@ -17,7 +17,10 @@ class JobsController extends Controller
     public function search(Request $request){
 
         $search = $request->get('search');
-        $jobs = DB::table('jobs')->where('position', 'like','%' .$search. '%')->paginate(5);
+        $jobs = DB::table('jobs')->where('position', 'like','%' .$search. '%')
+            ->orwhere('city','like', '%' .$search. '%')
+            ->orwhere('company','like','%' .$search. '%')
+            ->paginate(5);
         return view ('jobs.index',['jobs' => $jobs]);
     }
 
