@@ -12,6 +12,8 @@
             </div>
         </form>
     </div>
+    <br>
+    <a class="btn btn-primary" href="{{URL::to('jobs/create')}}">Create a job</a>
     @if(count($jobs) > 0)
         @foreach($jobs as $job)
 

@@ -22,5 +22,6 @@
             <div class="col-md-2"></div>
             <input type="submit" class="btn btn-primary">
         </div>
+    </form>
 
 @endsection

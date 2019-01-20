@@ -18,7 +18,9 @@ Route::get('/', function () {
 Route::resource('jobs','JobsController');
 Route::resource('images','ImageController');
 Route::resource('company','CompanyController');
+Route::resource('cities','CityController');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/search','JobsController@search');
+Route::get('/search2','CityController@search2');
