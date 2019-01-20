@@ -2,8 +2,19 @@
 
 
 @section('content')
+    <div class="col-md-4">
+        <form action="/search" method="GET">
+            <div class="input-group">
+                <input type="search" name="search" class="form-control">
+                <span class="input-group-prepend">
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </span>
+            </div>
+        </form>
+    </div>
     @if(count($jobs) > 0)
         @foreach($jobs as $job)
+
 
             <ul class="list-group" style="padding-left:25px;padding-right: 25px;padding-top: 10px;">
                 <li class="list-group-item">

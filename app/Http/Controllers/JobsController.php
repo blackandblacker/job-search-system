@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Job;
+
 use DB;
 
 class JobsController extends Controller
@@ -13,11 +14,20 @@ class JobsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function search(Request $request){
+
+        $search = $request->get('search');
+        $jobs = DB::table('jobs')->where('position', 'like','%' .$search. '%')->paginate(5);
+        return view ('jobs.index',['jobs' => $jobs]);
+    }
+
     public function index()
     {
+
+
         //
         $jobs = Job::orderBy('position','asc')->paginate(4);
-        return view('jobs.index')->with('jobs',$jobs);
+        return view('jobs.index',compact('jobs','s'))->with('jobs',$jobs);
     }
 
     /**
@@ -48,7 +58,7 @@ class JobsController extends Controller
         $job = new Job;
         $job->position = $request->input('position');
         $job->job_description = $request->input('job_description');
-        $job->city = $request->input('city');
+        $job->city = $request->input('job_city');
         $job->company = $request->input('job_company');
         $job->save();
 

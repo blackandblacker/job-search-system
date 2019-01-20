@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Company;
+use App\Job;
 
 class CompanyController extends Controller
 {
@@ -14,7 +15,8 @@ class CompanyController extends Controller
      */
     public function index()
     {
-        return view('Companies.index');
+        $allCompanies = Company::all();
+        return view('companies.index')->with('allCompanies',$allCompanies);
     }
 
     /**
@@ -25,6 +27,10 @@ class CompanyController extends Controller
     public function create()
     {
         //
+        $jobModel = new Job();
+        $allJobs = $jobModel::all()->pluck('position','id');
+        $allJobs = ['' => 'Select Job'] + $allJobs->all();
+        return view('companies.create')->with('allJobs',$allJobs);
     }
 
     /**
@@ -35,7 +41,20 @@ class CompanyController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $jobid = $request->get('job_id');
+       // if(empty($job_id)){
+       //     print 'error';die;
+        //}
+        $company = new Company([
+            'name' => $request->get('name'),
+            'job_id' => $request->get('job_id'),
+            'city' => $request->get('company_city'),
+            'jobid' => $request->get('job_id'),
+
+        ]);
+        $company->save();
+        return redirect('company');
     }
 
     /**
