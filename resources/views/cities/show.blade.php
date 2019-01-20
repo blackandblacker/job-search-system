@@ -14,10 +14,8 @@
                 <hr>
                 <a href="/cities" class="btn btn-primary">Go back</a>
 
+                @if(!Auth::guest())
                 <a href="/cities/{{$city->id}}/edit" class="btn btn-primary">Edit</a>
-
-
-
 
                 {!! Form::open(['action'=>['CityController@destroy',$city->id],'method' => 'POST','class' => 'pull-right']) !!}
                 {{Form::submit('Delete',['class' => 'btn btn-danger'])}}
@@ -25,6 +23,7 @@
 
 
                 {!! Form::close() !!}
+                @endif
             </li>
         </ul>
     </div>

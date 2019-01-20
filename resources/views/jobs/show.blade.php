@@ -20,11 +20,8 @@
         <hr>
 
             <a href="/jobs" class="btn btn-primary">Go back</a>
-
+        @if(!Auth::guest())
         <a href="/jobs/{{$job->id}}/edit" class="btn btn-primary">Edit</a>
-
-
-
 
         {!! Form::open(['action'=>['JobsController@destroy',$job->id],'method' => 'POST','class' => 'pull-right']) !!}
             {{Form::submit('Delete',['class' => 'btn btn-danger'])}}
@@ -32,6 +29,7 @@
 
 
         {!! Form::close() !!}
+            @endif
         </li>
     </ul>
 </div>
