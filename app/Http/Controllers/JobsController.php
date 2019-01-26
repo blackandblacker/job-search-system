@@ -65,14 +65,34 @@ class JobsController extends Controller
         //
         $this->validate($request,
             ['position' => 'required',
-             'job_description' => 'required'
+             'job_description' => 'required',
+              'cover_image' => 'image|nullable|max:1999'
             ]);
+
+        //Handle file upload
+        if($request->hasFile('cover_image')){
+
+            //Get filename with extensions
+            $filenameWithExt = $request->file('cover_image')->getClientOriginalName();
+            //get just filename
+            $filename = pathinfo($filenameWithExt,PATHINFO_FILENAME);
+            //get just ext
+            $extension = $request->file('cover_image')->getClientOriginalExtension();
+            //Filename to store
+            $fileNameToStore= $filename.'_'.time().'.'.$extension;
+            //Upload image
+            $path = $request->file('cover_image')->storeAs('public/cover_images',$fileNameToStore);
+
+        }else{
+            $fileNameToStore = 'noimage.jpg';
+        }
 
         $job = new Job;
         $job->position = $request->input('position');
         $job->job_description = $request->input('job_description');
         $job->city = $request->input('job_city');
         $job->company = $request->input('job_company');
+        $job->cover_image = $fileNameToStore;
         $job->save();
 
         return redirect('/jobs');
