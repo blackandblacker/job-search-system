@@ -4,6 +4,16 @@
 @section('content')
     <div class="container">
         <h1>Edit Company</h1>
+        @if (count($errors)>0)
+            <ul>
+
+                @foreach($errors->all() as $error)
+
+                    <li class="alert alert-danger">{{$error}}</li>
+                @endforeach
+
+            </ul>
+        @endif
         {!! Form::open(['action'=> ['CompanyController@update',$company->id],'method'=>'POST']) !!}
         <div class="form-group">
             {{Form::label('name','Position Name')}}

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Company;
 use App\Job;
 use DB;
+use App\Http\Requests\CompanyRequests;
 use Session;
 
 class CompanyController extends Controller
@@ -64,9 +65,9 @@ class CompanyController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CompanyRequests $request)
     {
-
+         $validated = validate($request);
         $jobid = $request->get('job_id');
        // if(empty($job_id)){
        //     print 'error';die;
@@ -114,15 +115,11 @@ class CompanyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CompanyRequests $request, $id)
     {
         //
         //
-        $this->validate($request,
-            ['name' => 'required',
-                'city' => 'required',
-                'adress' => 'required',
-            ]);
+        $validated = validate($request);
 
         $company = Company::find($id);
         $company->name = $request->input('name');

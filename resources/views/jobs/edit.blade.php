@@ -4,6 +4,17 @@
 @section('content')
     <div class="container">
     <h1>Edit Job</h1>
+
+        @if (count($errors)>0)
+            <ul>
+
+                @foreach($errors->all() as $error)
+
+                    <li class="alert alert-danger">{{$error}}</li>
+                @endforeach
+
+            </ul>
+        @endif
     {!! Form::open(['action'=> ['JobsController@update',$job->id],'method'=>'POST','enctype' => 'multipart/form-data']) !!}
     <div class="form-group">
         {{Form::label('position','Position Name')}}

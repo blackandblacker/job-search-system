@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Job;
 use Illuminate\Support\Facades\Storage;
 use Session;
+use App\Http\Requests\JobsRequest;
 use DB;
 
 class JobsController extends Controller
@@ -60,14 +61,10 @@ class JobsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(JobsRequest $request)
     {
         //
-        $this->validate($request,
-            ['position' => 'required',
-             'job_description' => 'required',
-              'cover_image' => 'image|nullable|max:1999'
-            ]);
+        $validated = $request->validated();
 
         //Handle file upload
         if($request->hasFile('cover_image')){
@@ -132,13 +129,10 @@ class JobsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(JobsRequest $request, $id)
     {
         //
-        $this->validate($request,
-            ['position' => 'required',
-                'job_description' => 'required'
-            ]);
+        $validated = $request->validated();
 
         //Handle file upload
         if($request->hasFile('cover_image')){

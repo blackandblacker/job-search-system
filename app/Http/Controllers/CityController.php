@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\City;
+use App\Http\Requests\CitiesRequest;
 use Illuminate\Support\Facades\DB;
 
 class CityController extends Controller
@@ -56,13 +57,10 @@ class CityController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CitiesRequest $request)
     {
         //
-        $this->validate($request,
-            ['city_name' => 'required',
-                'country' => 'required'
-            ]);
+       $validated = validate($request);
 
         $city = new City();
         $city->city_name = $request->input('city_name');
@@ -105,14 +103,10 @@ class CityController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CitiesRequest $request, $id)
     {
-
         //
-        $this->validate($request,
-            ['city_name' => 'required',
-                'country' => 'required'
-            ]);
+        $validated = validate($request);
 
         $city = City::find($id);
         $city->city_name = $request->input('city_name');
