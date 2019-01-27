@@ -18,11 +18,13 @@
         @foreach($jobs as $job)
 
             <div class="row">
-                <div class="col-md-4 col-sm-4">
-                    <img style="width: 100%" src="/storage/cover_images/{{$job->cover_image}}">
-                </div>
                 <div class="col-md-8 col-sm-8">
                     <ul class="list-group" style="padding-left:25px;padding-right: 25px;padding-top: 10px;">
+                        <li class="list-group-item">
+                            <div class="col-md-4 col-sm-4">
+                                <img style="width: 100%" src="/storage/cover_images/{{$job->cover_image}}">
+                            </div>
+                        </li>
                         <li class="list-group-item">
                             <h3> {{$job->position}}</h3>
                             <small>Posted on:<strong> {{$job->created_at}} </strong>  </small>

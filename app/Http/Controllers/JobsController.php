@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Job;
-
+use Illuminate\Support\Facades\Storage;
 use DB;
 
 class JobsController extends Controller
@@ -133,17 +133,38 @@ class JobsController extends Controller
      */
     public function update(Request $request, $id)
     {
+
+
         //
         $this->validate($request,
             ['position' => 'required',
                 'job_description' => 'required'
             ]);
 
+        //Handle file upload
+        if($request->hasFile('cover_image')){
+
+            //Get filename with extensions
+            $filenameWithExt = $request->file('cover_image')->getClientOriginalName();
+            //get just filename
+            $filename = pathinfo($filenameWithExt,PATHINFO_FILENAME);
+            //get just ext
+            $extension = $request->file('cover_image')->getClientOriginalExtension();
+            //Filename to store
+            $fileNameToStore= $filename.'_'.time().'.'.$extension;
+            //Upload image
+            $path = $request->file('cover_image')->storeAs('public/cover_images',$fileNameToStore);
+
+        }
+
         $job = Job::find($id);
         $job->position = $request->input('position');
         $job->city = $request ->input('city');
         $job->company = $request ->input('job_company');
         $job->job_description = $request->input('job_description');
+        if($request->hasFile('cover_image')){
+            $job->cover_image = $fileNameToStore;
+        }
         $job->save();
 
         return redirect('/jobs');
@@ -159,6 +180,10 @@ class JobsController extends Controller
     {
         //
         $job = Job::find($id);
+        if($job->cover_image != 'noimage.jpg'){
+            //Delete the image
+            Storage::delete('public/cover_images/'.$job->cover_image);
+        }
         $job->delete();
         return redirect('jobs');
 

@@ -8,6 +8,7 @@
 
         <h1>{{$job->position}}</h1>
 
+            <img style="width: 100%" src="/storage/cover_images/{{$job->cover_image}}">
         <div>
            Description: {{$job->job_description}}
         </div>

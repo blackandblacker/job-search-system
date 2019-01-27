@@ -6,6 +6,7 @@
 
         <title>Laravel</title>
 
+
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet" type="text/css">
 
@@ -84,12 +85,16 @@
                     Laravel
                 </div>
 
+
+
+
                 <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
+                    <a href="/home" class="nav-link">Home</a>
+                    <a href="/jobs" class="nav-link">Jobs</a>
+                    <a href="/company" class="nav-link">Companies</a>
+                    <a href="/cities" class="nav-link">Cities</a>
                     <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
+
                     <a href="https://github.com/laravel/laravel">GitHub</a>
                 </div>
             </div>
