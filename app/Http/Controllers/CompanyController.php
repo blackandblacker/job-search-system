@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use DemeterChain\C;
 use Illuminate\Http\Request;
 use App\Company;
 use App\Job;
+use DB;
+use Session;
 
 class CompanyController extends Controller
 {
@@ -17,17 +20,28 @@ class CompanyController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth',['except' =>['index','show']]);
     }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+    public function search3(Request $request)
+    {
+
+        $search = $request->get('search3');
+        $companies = DB::table('companies')->where('name', 'like','%' .$search. '%')
+            ->orwhere('city','like', '%' .$search. '%')
+            ->paginate(5);
+        return view ('companies.index',['companies' => $companies]);
+    }
+
     public function index()
     {
-        $allCompanies = Company::all();
-        return view('companies.index')->with('allCompanies',$allCompanies);
+
+        $companies = Company::orderBy('name','asc')->paginate(4);
+        return view('companies.index',compact('companies','s'))->with('companies',$companies);
     }
 
     /**
@@ -57,14 +71,14 @@ class CompanyController extends Controller
        // if(empty($job_id)){
        //     print 'error';die;
         //}
-        $company = new Company([
+        $companies = new Company([
             'name' => $request->get('name'),
-            'city' => $request->get('company_city'),
-            'jobid' => $request->get('job_id'),
-
+            'city' => $request->get('city'),
+            'adress' =>$request->get('adress'),
+            'phone_number' =>$request->get('phone_number')
         ]);
-        $company->save();
-        return redirect('company');
+        $companies->save();
+        return redirect('/companies');
     }
 
     /**
@@ -76,6 +90,8 @@ class CompanyController extends Controller
     public function show($id)
     {
         //
+        $companies = Company::find($id);
+        return view('companies.show')->with('companies',$companies);
     }
 
     /**
@@ -87,6 +103,8 @@ class CompanyController extends Controller
     public function edit($id)
     {
         //
+        $company = Company::find($id);
+        return view('companies.edit')->with('company',$company);
     }
 
     /**
@@ -99,6 +117,21 @@ class CompanyController extends Controller
     public function update(Request $request, $id)
     {
         //
+        //
+        $this->validate($request,
+            ['name' => 'required',
+                'city' => 'required',
+                'adress' => 'required',
+            ]);
+
+        $company = Company::find($id);
+        $company->name = $request->input('name');
+        $company->city = $request ->input('city');
+        $company->adress = $request->input('adress');
+        $company->phone_number = $request->input('phone_number');
+        $company->save();
+
+        return redirect('/companies');
     }
 
     /**
@@ -110,5 +143,8 @@ class CompanyController extends Controller
     public function destroy($id)
     {
         //
+        $copany = Company::find($id);
+        $copany ->delete();
+        return redirect('companies');
     }
 }

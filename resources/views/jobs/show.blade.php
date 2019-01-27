@@ -9,13 +9,13 @@
         <h1>{{$job->position}}</h1>
 
             <img style="width: 100%" src="/storage/cover_images/{{$job->cover_image}}">
+            <br>
+            <br>
         <div>
            Description: {{$job->job_description}}
         </div>
         <hr>
         <small>Added on: {{$job->created_at}}</small>
-        <hr>
-        <small>Company: {{$job->company}}</small>
         <hr>
         <small>Job location: {{$job->city}}</small>
         <hr>

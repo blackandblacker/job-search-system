@@ -91,7 +91,7 @@
                 <div class="links">
                     <a href="/home" class="nav-link">Home</a>
                     <a href="/jobs" class="nav-link">Jobs</a>
-                    <a href="/company" class="nav-link">Companies</a>
+                    <a href="/companies" class="nav-link">Companies</a>
                     <a href="/cities" class="nav-link">Cities</a>
                     <a href="https://laracasts.com">Laracasts</a>
 

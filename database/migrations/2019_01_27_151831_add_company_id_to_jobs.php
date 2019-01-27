@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateJobsTable extends Migration
+class AddCompanyIdToJobs extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,10 @@ class CreateJobsTable extends Migration
      */
     public function up()
     {
-        Schema::create('jobs', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('position');
-            $table->text('job_description');
-            $table->string('city');
-            $table->timestamps();
+        Schema::table('jobs', function (Blueprint $table) {
+            //
+            $table->integer('company_id')->nullable()->unsigned();
+            $table->foreign('company_id')->references('id')->on('companies');
         });
     }
 
@@ -29,6 +27,8 @@ class CreateJobsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('jobs');
+        Schema::table('jobs', function (Blueprint $table) {
+            //
+        });
     }
 }

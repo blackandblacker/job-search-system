@@ -13,11 +13,6 @@
     {{Form::text('job_city','',['class' => 'form-control','placeholder' => 'Job Location'])}}
 </div>
 <div class="form-group">
-    {{Form::label('job_company','Company')}}
-    {{Form::text('job_company','',['class' =>'form-control','placeholder' =>'Company'])}}
-
-</div>
-<div class="form-group">
     {{Form::label('job_description','Job Description')}}
     {{Form::textarea('job_description','',['class' => 'form-control','placeholder' => 'Job Description'])}}
 </div>

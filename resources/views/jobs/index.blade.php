@@ -2,8 +2,8 @@
 
 
 @section('content')
-    <div class="col-md-4">
-        <form action="/search" method="GET">
+    <div class="col-md-4" >
+        <form action="/search" method="GET" style="margin-left: 10px">
             <div class="input-group">
                 <input type="search" name="search" class="form-control">
                 <span class="input-group-prepend">
@@ -13,7 +13,7 @@
         </form>
     </div>
     <br>
-    <a class="btn btn-primary" href="{{URL::to('jobs/create')}}">Create a job</a>
+    <a class="btn btn-primary" href="{{URL::to('jobs/create')}}" style="margin-left: 25px">Create a job</a>
     @if(count($jobs) > 0)
         @foreach($jobs as $job)
 
@@ -29,9 +29,9 @@
                             <h3> {{$job->position}}</h3>
                             <small>Posted on:<strong> {{$job->created_at}} </strong>  </small>
                             <br>
-                            <small>Posted by:<strong> {{$job->company}} </strong> </small>
-                            <br>
                             <small>Location:<strong> {{$job->city}} </strong></small>
+                            <br>
+                            <small>Company_ID:<strong> <a href="{{URL::to('/companies')}}">{{$job->company_id}} </a> </strong></small>
                             <hr>
                             <a href="/jobs/{{$job->id}}" class="btn btn-primary">Show</a>
                         </li>

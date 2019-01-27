@@ -35,7 +35,7 @@
                     <ul class="nav navbar-nav">
                         <li class="nav-item"><a href="/home" class="nav-link">Home</a> </li>
                         <li class="nav-item"><a href="/jobs" class="nav-link">Jobs</a> </li>
-                        <li class="nav-item"><a href="/company" class="nav-link">Companies</a></li>
+                        <li class="nav-item"><a href="/companies" class="nav-link">Companies</a></li>
                         <li class="nav-item"><a href="/cities" class="nav-link">Cities</a> </li>
                     </ul>
 

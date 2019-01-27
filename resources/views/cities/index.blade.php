@@ -3,7 +3,7 @@
 
 @section('content')
     <div class="col-md-4">
-        <form action="/search2" method="GET">
+        <form action="/search2" method="GET" style="margin-left: 10px">
             <div class="input-group">
                 <input type="search" name="search2" class="form-control">
                 <span class="input-group-prepend">
@@ -13,7 +13,7 @@
         </form>
     </div>
     <br>
-    <a class="btn btn-primary" href="{{URL::to('cities/create')}}">Create a city</a>
+    <a class="btn btn-primary" href="{{URL::to('cities/create')}}" style="margin-left: 25px">Create a city</a>
     @if(count($cities) > 0)
         @foreach($cities as $city)
 

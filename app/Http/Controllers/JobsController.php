@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Job;
 use Illuminate\Support\Facades\Storage;
+use Session;
 use DB;
 
 class JobsController extends Controller
@@ -29,7 +30,6 @@ class JobsController extends Controller
         $search = $request->get('search');
         $jobs = DB::table('jobs')->where('position', 'like','%' .$search. '%')
             ->orwhere('city','like', '%' .$search. '%')
-            ->orwhere('company','like','%' .$search. '%')
             ->paginate(5);
         return view ('jobs.index',['jobs' => $jobs]);
     }
@@ -91,9 +91,10 @@ class JobsController extends Controller
         $job->position = $request->input('position');
         $job->job_description = $request->input('job_description');
         $job->city = $request->input('job_city');
-        $job->company = $request->input('job_company');
         $job->cover_image = $fileNameToStore;
         $job->save();
+
+        Session::flash('success','Job successfully posted');
 
         return redirect('/jobs');
     }
@@ -133,8 +134,6 @@ class JobsController extends Controller
      */
     public function update(Request $request, $id)
     {
-
-
         //
         $this->validate($request,
             ['position' => 'required',
@@ -160,7 +159,6 @@ class JobsController extends Controller
         $job = Job::find($id);
         $job->position = $request->input('position');
         $job->city = $request ->input('city');
-        $job->company = $request ->input('job_company');
         $job->job_description = $request->input('job_description');
         if($request->hasFile('cover_image')){
             $job->cover_image = $fileNameToStore;
