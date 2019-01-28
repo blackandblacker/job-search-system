@@ -13,8 +13,9 @@
         </form>
     </div>
     <br>
-    <a class="btn btn-primary" href="{{URL::to('jobs/create')}}" style="margin-left: 25px">Create a job</a>
-
+    @if(auth::check())
+    <a class="btn btn-primary" href="{{URL::to('jobs/create')}}" style="margin-left: 25px">Post a job</a>
+    @endif
 
 
     @if(count($jobs) > 0)

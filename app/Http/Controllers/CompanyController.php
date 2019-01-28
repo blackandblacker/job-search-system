@@ -34,6 +34,7 @@ class CompanyController extends Controller
         $search = $request->get('search3');
         $companies = DB::table('companies')->where('name', 'like','%' .$search. '%')
             ->orwhere('city','like', '%' .$search. '%')
+            ->orwhere('adress','like', '%' .$search. '%')
             ->paginate(5);
         return view ('companies.index',['companies' => $companies]);
     }
@@ -53,10 +54,10 @@ class CompanyController extends Controller
     public function create()
     {
         //
-        $jobModel = new Job();
-        $allJobs = $jobModel::all()->pluck('position','id');
-        $allJobs = ['' => 'Select Job'] + $allJobs->all();
-        return view('companies.create')->with('allJobs',$allJobs);
+        //$jobModel = new Job();
+        //$allJobs = $jobModel::all()->pluck('position','id');
+        //$allJobs = ['' => 'Select Job'] + $allJobs->all();
+        return view('companies.create');
     }
 
     /**
@@ -67,17 +68,17 @@ class CompanyController extends Controller
      */
     public function store(CompanyRequests $request)
     {
-         $validated = validate($request);
-        $jobid = $request->get('job_id');
+        $validated = $request->validated();
+        //$jobid = $request->get('job_id');
        // if(empty($job_id)){
        //     print 'error';die;
         //}
-        $companies = new Company([
-            'name' => $request->get('name'),
-            'city' => $request->get('city'),
-            'adress' =>$request->get('adress'),
-            'phone_number' =>$request->get('phone_number')
-        ]);
+
+        $companies = new Company();
+        $companies->name = $request->input('name');
+        $companies->city = $request->input('city');
+        $companies->adress = $request->input('adress');
+        $companies->phone_number = $request->input('phone_number');
         $companies->save();
         return redirect('/companies');
     }
@@ -119,7 +120,7 @@ class CompanyController extends Controller
     {
         //
         //
-        $validated = validate($request);
+        $validated = $request->validated();
 
         $company = Company::find($id);
         $company->name = $request->input('name');

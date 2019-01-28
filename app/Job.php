@@ -7,12 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 class Job extends Model
 {
     //
-    protected $fillable = ['position'];
+    protected $fillable = ['position','city','company_id'];
 
 
 
     public function company()
     {
-        return $this->hasMany('App\Company');
+        return $this->hasMany(Company::class);
     }
 }

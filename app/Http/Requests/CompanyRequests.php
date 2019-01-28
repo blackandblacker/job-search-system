@@ -27,7 +27,7 @@ class CompanyRequests extends FormRequest
             'name' => 'required',
             'city' => 'required',
             'adress' => 'required',
-            'phone_number' => 'required',
+            'phone_number' => 'required|min:10|numeric',
 
         ];
     }
@@ -38,7 +38,8 @@ class CompanyRequests extends FormRequest
                'name.required' => "Name of the company required",
                'city.required' => "City of the company required",
                'adress.required' => "Adress of the company required",
-               'phone_number.required' => "Phone Number of the company required"
+               'phone_number.required' => "Phone Number field is required"
+
         ];
     }
 }

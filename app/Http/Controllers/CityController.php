@@ -60,7 +60,7 @@ class CityController extends Controller
     public function store(CitiesRequest $request)
     {
         //
-       $validated = validate($request);
+        $validated = $request->validated();
 
         $city = new City();
         $city->city_name = $request->input('city_name');
@@ -106,7 +106,7 @@ class CityController extends Controller
     public function update(CitiesRequest $request, $id)
     {
         //
-        $validated = validate($request);
+        $validated = $request->validated();
 
         $city = City::find($id);
         $city->city_name = $request->input('city_name');

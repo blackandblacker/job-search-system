@@ -13,7 +13,9 @@
         </form>
     </div>
     <br>
+    @if(auth::check())
     <a class="btn btn-primary" href="{{URL::to('cities/create')}}" style="margin-left: 25px">Create a city</a>
+    @endif
     @if(count($cities) > 0)
         @foreach($cities as $city)
 

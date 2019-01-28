@@ -13,7 +13,9 @@
         </form>
     </div>
     <br>
+    @if(auth::check())
     <a class="btn btn-primary" href="{{URL::to('companies/create')}}" style="margin-left: 25px">Create a company</a>
+    @endif
     @if(count($companies) > 0)
         @foreach($companies as $company)
 
@@ -24,7 +26,9 @@
                     <br>
                     <small>Location:<strong> {{$company->city}} </strong></small>
                     <br>
-                    <small>Posted on:<strong> {{$company->created_at}} </strong>  </small>
+                    <small>Company Address:<strong> {{$company->adress}} </strong>  </small>
+                    <br>
+                    <small>Company Phone Number:<strong> {{$company->phone_number}} </strong>  </small>
                     <br>
                     <hr>
                     <a href="/companies/{{$company->id}}" class="btn btn-primary">Show</a>

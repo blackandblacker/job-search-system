@@ -22,8 +22,8 @@
     {{Form::text('position','',['class' => 'form-control','placeholder' => 'position name'])}}
 </div>
 <div class="form-group">
-    {{Form::label('job_city','Job Location')}}
-    {{Form::text('job_city','',['class' => 'form-control','placeholder' => 'Job Location'])}}
+    {{Form::label('city','Job Location')}}
+    {{Form::text('city','',['class' => 'form-control','placeholder' => 'Job Location'])}}
 </div>
 <div class="form-group">
     {{Form::label('job_description','Job Description')}}

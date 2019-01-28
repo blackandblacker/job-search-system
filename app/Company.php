@@ -4,13 +4,14 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+
 class Company extends Model
 {
     //
-    protected $fillable = ['name','city','adress','phone_number'];
+    protected $fillable = ['name','city',];
     protected $table = 'companies';
 
     public function  jobs(){
-        return $this->belongsTo('App\Job');
+        return $this->belongsTo(App\Job);
     }
 }

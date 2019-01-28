@@ -12,19 +12,19 @@
             <br>
             <br>
         <div>
-           Description: {{$job->job_description}}
+           Description:<strong> {{$job->job_description}}</strong>
         </div>
         <hr>
-        <small>Added on: {{$job->created_at}}</small>
+        <small>Added on:<strong> {{$job->created_at}}</strong> </small>
         <hr>
-        <small>Job location: {{$job->city}}</small>
+        <small>Job location:<strong> {{$job->city}}</strong></small>
         <hr>
 
             <a href="/jobs" class="btn btn-primary">Go back</a>
         @if(!Auth::guest())
         <a href="/jobs/{{$job->id}}/edit" class="btn btn-primary">Edit</a>
 
-        {!! Form::open(['action'=>['JobsController@destroy',$job->id],'method' => 'POST','class' => 'pull-right']) !!}
+        {!! Form::open(['action'=>['JobsController@destroy',$job->id],'method' => 'POST','class' => 'pull-right','style' => 'margin-top:5px;']) !!}
             {{Form::submit('Delete',['class' => 'btn btn-danger'])}}
         {{Form::hidden('_method','DELETE' )}}
 

@@ -16,7 +16,7 @@ class AddCompanyIdToJobs extends Migration
         Schema::table('jobs', function (Blueprint $table) {
             //
             $table->integer('company_id')->nullable()->unsigned();
-            $table->foreign('company_id')->references('id')->on('companies');
+            $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade');
         });
     }
 

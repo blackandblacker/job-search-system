@@ -11,16 +11,16 @@ use DB;
 
 class JobsController extends Controller
 {
-
+    public function __construct()
+    {
+        $this->middleware('auth',['except' =>['index','show']]);
+    }
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('auth',['except' =>['index','show']]);
-    }
+
     /**
      * Display a listing of the resource.
      *
@@ -87,7 +87,7 @@ class JobsController extends Controller
         $job = new Job;
         $job->position = $request->input('position');
         $job->job_description = $request->input('job_description');
-        $job->city = $request->input('job_city');
+        $job->city = $request->input('city');
         $job->cover_image = $fileNameToStore;
         $job->save();
 
