@@ -30,6 +30,9 @@
     {{Form::textarea('job_description','',['class' => 'form-control','placeholder' => 'Job Description'])}}
 </div>
 <div class="form-group">
+{!! Form::select('company_id', $companyLists, null, ['class' => 'form-control']) !!}
+</div>
+<div class="form-group">
     {{Form::file('cover_image')}}
 </div>
 {{Form::submit('Submit',['class'=>'btn btn-primary'])}}

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Company;
 use Illuminate\Http\Request;
 use App\Job;
 use Illuminate\Support\Facades\Storage;
@@ -40,8 +41,9 @@ class JobsController extends Controller
 
 
         //
+        $company = Company::all();
         $jobs = Job::orderBy('position','asc')->paginate(4);
-        return view('jobs.index',compact('jobs','s'))->with('jobs',$jobs);
+        return view('jobs.index',compact('jobs','s'))->with('jobs',$jobs)->with('company',$company);
     }
 
     /**
@@ -52,7 +54,9 @@ class JobsController extends Controller
     public function create()
     {
         //
-        return view('jobs.create');
+        $companyLists = Company::all()->pluck('name','id');
+        $companyLists = array('0' => 'Select Company') + $companyLists->all();
+        return view('jobs.create')->with('companyLists',$companyLists);
     }
 
     /**
@@ -89,6 +93,7 @@ class JobsController extends Controller
         $job->job_description = $request->input('job_description');
         $job->city = $request->input('city');
         $job->cover_image = $fileNameToStore;
+        $job->company_id = $request->input('company_id');
         $job->save();
 
         Session::flash('success','Job successfully posted');

@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Dashboard</div>
+                <div class="card-header">User Dashboard</div>
 
 
                 <div class="card-body">
@@ -14,9 +14,11 @@
                             {{ session('status') }}
                         </div>
                     @endif
+                    <div class="alert alert-success" role="alert">
+                          <p>You are loged in as <stron>User</stron></p>
+                    </div>
 
 
-                    You are logged in!
                 </div>
             </div>
         </div>

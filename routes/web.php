@@ -21,7 +21,10 @@ Route::resource('companies','CompanyController');
 Route::resource('cities','CityController');
 Auth::routes();
 
+Route::get('/admin','AdminController@index');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/search','JobsController@search');
 Route::get('/search2','CityController@search2');
 Route::get('/search3','CompanyController@search3');
+
+
